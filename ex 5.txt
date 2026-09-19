@@ -1,0 +1,48 @@
+import java.util.*;
+
+public class Main {
+	public static void left(char ch[], int rot) {
+	    int len = ch.length;
+	    while(rot != 0) {
+	        char temp = ch[0];
+    	    for(int ind=0;ind<len-1;ind++)
+    	        ch[ind] = ch[ind+1];
+    	    ch[len-1] = temp;
+    	    rot--;
+	    }
+	}
+	
+	public static void right(char ch[], int rot) {
+	    int len = ch.length;
+	    while(rot != 0) {
+	        char temp = ch[len-1];
+    	    for(int ind=len-1;ind>=1;ind--)
+    	        ch[ind] = ch[ind-1];
+    	    ch[0] = temp;
+    	    rot--;
+	    }
+	}
+	
+	public static void main(String[] args) {
+		Scanner sc = new Scanner(System.in);
+		String str = sc.next();
+		String dir = sc.next();
+		String res = "";
+		char ch[] = str.toCharArray();
+		int rot = 0;
+		for(int ind=0;ind<dir.length();ind++) {
+		    char c = dir.charAt(ind);
+		    if(c>='1' && c<='9')
+		        rot = rot * 10 + (c - 48);
+		    else {
+		        if(c == 'L')
+		            left(ch, rot);
+		        else
+		            right(ch, rot);
+		        res = res + ch[0];
+		        rot = 0;
+		    }
+		}
+		System.out.print(str.contains(res));
+	}
+}
